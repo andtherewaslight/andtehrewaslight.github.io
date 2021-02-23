@@ -13164,8 +13164,9 @@ $$<p>where $k_T$ and $\gamma$ are defined as:</p>
 $$
 k_T^2=n_{core}^2k_0^2-\beta^2 \\
 \gamma^2=\beta^2-n_{clad}^2k_0^2
-$$<p>and J and K are the <a href="https://en.wikipedia.org/wiki/Bessel_function">Bessel functions</a> of the first and second kind respectively. If it's the first time you hear about Bessel functions don't panic, they are functions that appear very often as solutions to differential equations in cylindrical or spherical coordinates, and many scientific calculators have them in their arsenal. You can simply consider the Bessel functions of the first kind as oscillating functions with a decaying amplitude, and the ones of the second kind as some kind of stretched decaying exponential. They look like this:</p>
-<p>&lt;&lt;fig. Bessel functions&gt;&gt;</p>
+$$<p>and J and K are the <a href="https://en.wikipedia.org/wiki/Bessel_function">Bessel functions</a> of the first and the modified second kind respectively. If it's the first time you hear about Bessel functions don't panic, they are functions that appear very often as solutions to differential equations in cylindrical or spherical coordinates, and many scientific calculators have them in their arsenal. You can simply consider the Bessel functions of the first kind as oscillating functions with a decaying amplitude, and the ones of the second kind as some kind of stretched decaying exponential. They look like this:</p>
+<p><img src="fiber_modes_images/Bessel_functions.png" alt="fig_Bessel_functions"></p>
+<p><em>Bessel functions of the first kind J and modified second kind K</em></p>
 <p>So you may think that we have found the solution, so we can all go home, but unfortunately we are not done yet. We still need to calculate the propagation constant and the actual electric and magnetic field components that satisfy the boundary conditions, and that is not an easy task in the general case. However in realistic fibers, we can make an aproximation which will simplify the task.</p>
 <h2 id="Linearly-polarized-(LP)-modes">Linearly polarized (LP) modes<a class="anchor-link" href="#Linearly-polarized-(LP)-modes">&#182;</a></h2><p>Most fibers in the real world have a weak refractive index contrast ($n_{core}-n_{clad}&lt;&lt;1$), which is called <em>weakly guiding</em> condition. In this approximation, the boundary conditions at the interface can be simplified so that both electric and magnetic fields are continuous and derivable at $r=a$. This greatly simplifies the calculation of the modes, although the solution of the actual propagation constants is not analytical but has to be calculated numerically. Once we get the scalar function $u(r)$, the small index contrast allows us to apply the $u(r)$ profile to any electric field component to get the actual electric field profiles for each polarization, which we choose vertical and horizontal for convencience. Thus in this approximation, each LP mode actually corresponds to two differently polazired modes, one vertical and one horizontal, with identical mode profiles and propagating properties.</p>
 <p>So this program numerically calculates all possible solutions that satisfy the boundary conditions, and computes the mode profiles for each case. But how many modes does a fiber has? To answer that question, it is very helpful to define some new variables (don't worry, we're almost there, I promise). First let us define a normalized adimensional parameter called the $V$ or the $V$ parameter  of the fiber:</p>
@@ -13173,9 +13174,10 @@ $$
 V=2\pi\frac{a}{\lambda_0}\text{NA}
 $$<p>This number is very important because it is a single number that can tell you about the number of modes the fiber can hold at a certain wavelength.</p>
 <p>In the following plot you can see how many modes are as a function of the $V$ number.</p>
-<p>&lt;fig. V number&gt;</p>
-<p>When V &lt; 2.405, the fiber only has one mode (it is a single-mode fiber). Beyond V=2.405, a higher-order mode emerges. That means that V=2.405 is called the <em>cut-off</em> of the higher order mode, below which that mode cannot propagate. Every high-order-mode has a <em>cut-off</em>, but the first one is the most important because it dictates whether the fiber is single-mode or multimode.</p>
-<p>It is worth noting that the V-number, thus the single- or multi-mode condition, not only depends on the fiber geometrical properties, but also on the wavelength. So a single-mode fiber always becomes multimode at a shorter wavelength.</p>
+<p><img src="fiber_modes_images/fiber_modes_vs_V.png" alt="fig_modes_vs_V_number"></p>
+<p><em>Calculated modes vs. V-number.</em></p>
+<p>When V &lt; 2.405, the fiber only has one mode (it is a single-mode fiber). Beyond V=2.405, a higher-order mode emerges. That means that V=2.405 is called the <em>cut-off</em> of the higher order mode, below which that mode cannot propagate. Every high-order-mode has a <em>cut-off</em>, but the first one is the most important because it determines whether the fiber is single-mode or multimode.</p>
+<p>It is worth noting that the V-number, thus the single- or multi-mode condition, not only depends on the fiber geometrical properties, but also on the wavelength. So a single-mode fiber always becomes multimode at some shorter wavelength.</p>
 <p>You may notice that the fundamental mode has no cut-off, does it mean that a fiber can guide any wavelength? Mathematically, yes, but in practice no, because some approximations fall apart when guiding becomes extremely weak (V &lt;&lt; 1). In particular, when V&lt;&lt;1:</p>
 <ul>
 <li>bending loss becomes extremely high (even for very smooth curves)</li>
@@ -13183,7 +13185,8 @@ $$<p>This number is very important because it is a single number that can tell y
 <li>silica glass absorbs wavelenghts above $\gtrsim 2 \mu$m anyway.</li>
 </ul>
 <p>Now that we understand the mode cut-offs let's see how LP modes look like. They are characterized by two parameters, the $l$ parameter, as we defined before (the number of zeros along the mode's half-circumference), and a second parameter $m$ which is the number of zeros when going along the radial direction:</p>
-<p>&lt;fig. LP modes&gt;</p>
+<p><img src="fiber_modes_images/fiber_modes_white.png" alt="fig_LP_modes"></p>
+<p><em>Example of some LP modes in a typical multimode fiber.</em></p>
 <h2 id="Number-of-modes">Number of modes<a class="anchor-link" href="#Number-of-modes">&#182;</a></h2><p>It is worth mentioning that every LP mode can actually represent more than one propagating mode. Let's remember that each mode can have two polarizations, which in the low-index-contrast approximation they can be considered as degenerate. But when $|l|$&gt;0, the mode also has two helical polarities, corresponding to $+l$ and $-l$. This means that modes with $l$=0 have a degeneracy of 2 while modes with $|l|$&gt;0 have degeneracy 4. However they are not typically represented as they have the same shape. So when speaking about the number of modes in a fiber, it is always a good idea to clarify if you are talking about distinct LP modes or total number of modes including degenerates.</p>
 <p>A useful equation to estimate the total number of modes (including degenerates) as a function of $V$ is given by this equation:</p>
 $$
@@ -13457,10 +13460,17 @@ $$<p>which becomes precise for high values of $V$ (typical multimode fibers).</p
 
 <span class="k">def</span> <span class="nf">btn_plot_eventhandler</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
     <span class="n">obj</span><span class="o">.</span><span class="n">label_gen_plots</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">visibility</span> <span class="o">=</span> <span class="s1">&#39;Visible&#39;</span>
-    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">mode_row_list</span><span class="p">)):</span>
-        <span class="n">obj</span><span class="o">.</span><span class="n">mode_row_list</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">mode_row_list</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">mode_row_list</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">mode_fig_list</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
-    <span class="n">obj</span><span class="o">.</span><span class="n">mode_row_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">mode_row_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s1">&#39;  LP(L,M) mode description&#39;</span><span class="p">),</span>
+                                       <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s1">&#39;Radial plot&#39;</span><span class="p">),</span>
+                                       <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s1">&#39;2D image plot&#39;</span><span class="p">)],</span>
+                                     <span class="n">layout</span> <span class="o">=</span> <span class="n">fig_titles_layout</span><span class="p">)]</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">mode_row_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;250px&#39;</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">mode_row_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;190px&#39;</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">mode_row_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;150px&#39;</span>
+    
     <span class="n">obj</span><span class="o">.</span><span class="n">mode_fig_list</span> <span class="o">=</span> <span class="p">[]</span>
     
     <span class="n">modes</span> <span class="o">=</span> <span class="n">btn_calc</span><span class="o">.</span><span class="n">modes</span>
@@ -13474,7 +13484,7 @@ $$<p>which becomes precise for high values of $V$ (typical multimode fibers).</p
         
         <span class="n">text_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">show_text</span><span class="p">)</span>
         <span class="c1">#text_label.layout.display = &#39;flex&#39;</span>
-        <span class="n">text_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;150px&#39;</span>
+        <span class="n">text_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;100px&#39;</span>
         <span class="c1">#text_label.layout.justify_content = &#39;flex-start&#39;</span>
         
         <span class="c1">#mode_row_list[ii].children = [text_label, fig_rad_plot(modes[ii], r), fig_mode_profile(modes[ii])]</span>
@@ -13561,8 +13571,6 @@ $$<p>which becomes precise for high values of $V$ (typical multimode fibers).</p
             <span class="n">aa</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">display</span> <span class="o">=</span> <span class="s1">&#39;flex&#39;</span>
             <span class="n">aa</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">justify_content</span> <span class="o">=</span> <span class="s1">&#39;flex-end&#39;</span>
 
-<span class="c1">#cols[-1].layout.display=&#39;flex&#39;</span>
-<span class="c1">#cols[-1].layout.justify_items=&#39;flex-end&#39;</span>
 
 <span class="n">cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">text_n_clad</span><span class="p">,</span>
                          <span class="n">label_n_core</span><span class="p">,</span>
@@ -13573,7 +13581,7 @@ $$<p>which becomes precise for high values of $V$ (typical multimode fibers).</p
 
 <span class="n">grid_ctrl</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
 
-<span class="c1">#grid_ctrl</span>
+
 <span class="c1">#grid_ctrl = widgets.GridBox(layout=gr_layout)</span>
 <span class="c1">#grid_ctrl.children = [widgets.Label(&#39;Core diameter&#39;),slider_diam,widgets.Label(&#39;n cladding&#39;),text_n_clad,</span>
 <span class="c1">#                      widgets.Label(&#39;Num. Aperture (NA)&#39;),slider_Na,widgets.Label(&#39;n core&#39;),label_n_core,</span>
@@ -13587,19 +13595,12 @@ $$<p>which becomes precise for high values of $V$ (typical multimode fibers).</p
 
 <span class="n">mode_row_layout</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;590px&#39;</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="s1">&#39;solid 1px&#39;</span><span class="p">,</span> <span class="n">margin</span> <span class="o">=</span> <span class="s1">&#39;3px 3px 3px 3px&#39;</span><span class="p">,</span>
                                 <span class="n">justify_content</span> <span class="o">=</span> <span class="s1">&#39;space-around&#39;</span><span class="p">)</span>
-<span class="c1">#mode_row_layout = widgets.Layout(width=&#39;600px&#39;, height=&#39;150px&#39;)</span>
-
+<span class="n">fig_titles_layout</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;590px&#39;</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">margin</span> <span class="o">=</span> <span class="s1">&#39;10px 10px 10px 10px&#39;</span><span class="p">,</span>
+                                <span class="n">justify_content</span> <span class="o">=</span> <span class="s1">&#39;space-around&#39;</span><span class="p">)</span>
 
 
 <span class="n">btn_plot</span><span class="o">.</span><span class="n">mode_row_list</span> <span class="o">=</span> <span class="p">[]</span>
 
-
-<span class="c1">#for ii in range(3):</span>
-<span class="c1">#    btn_plot.mode_row_list.append(widgets.Output(layout = mode_row_layout))</span>
-<span class="c1">#    with btn_plot.mode_row_list[-1]:</span>
-<span class="c1">#        fig, ax= plt.subplots(figsize = (2.8, 2))</span>
-<span class="c1">#        btn_plot.mode_fig_list.append(fig)</span>
-<span class="c1">#        plt.show(fig)</span>
 
 <span class="n">mode_list_layout</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;600px&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">flex_flow</span><span class="o">=</span><span class="s1">&#39;column&#39;</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="s1">&#39;flex&#39;</span><span class="p">)</span>
 <span class="n">btn_plot</span><span class="o">.</span><span class="n">box_modes</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="n">btn_plot</span><span class="o">.</span><span class="n">mode_row_list</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">mode_list_layout</span><span class="p">)</span>
@@ -13666,40 +13667,6 @@ $$<p>which becomes precise for high values of $V$ (typical multimode fibers).</p
 </div>
 </div>
 
-  
-
-  <div class="
-      cell border-box-sizing code_cell rendered">
-    <div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-  </div>
-
-  
-
-  <div class="
-      cell border-box-sizing code_cell rendered">
-    <div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-  </div>
-
 
 
 <!-- Loads nbinteract package -->
@@ -13713,7 +13680,7 @@ $$<p>which becomes precise for high values of $V$ (typical multimode fibers).</p
     }
 
     var interact = new window.NbInteract({
-      spec: 'andtherewaslight/fiber_calc/main',
+      spec: 'andtherewaslight/fiber_calc/master',
       baseUrl: 'https://mybinder.org',
       provider: 'gh',
     })
