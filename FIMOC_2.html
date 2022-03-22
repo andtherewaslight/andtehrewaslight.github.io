@@ -13558,7 +13558,8 @@ $$<p>FIMOC also calculates the group velocity of each mode. It does so by calcul
         
         <span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MaxNLocator</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-
+        <span class="k">if</span> <span class="n">L_max</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mf">0.0</span><span class="p">])</span>
         
         <span class="n">ax2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ng_core</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
       
@@ -13569,7 +13570,8 @@ $$<p>FIMOC also calculates the group velocity of each mode. It does so by calcul
         <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$n_</span><span class="si">{g}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
         <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$L$&#39;</span><span class="p">)</span>
         <span class="n">ax2</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        
+        <span class="k">if</span> <span class="n">L_max</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mf">0.0</span><span class="p">])</span>
         
         <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
             
@@ -13783,7 +13785,7 @@ $$<p>FIMOC also calculates the group velocity of each mode. It does so by calcul
     }
 
     var interact = new window.NbInteract({
-      spec: 'andtherewaslight/fiber_calc/main',
+      spec: 'andtherewaslight/fiber_calc/master',
       baseUrl: 'https://mybinder.org',
       provider: 'gh',
     })
